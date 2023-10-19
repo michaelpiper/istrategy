@@ -145,7 +145,7 @@ LEFT JOIN
 ## Questions:
 ## 5a API Development: Develop a Restful API (CRUD operation) for the information provided and also write an integration test for this API.
 ### Answer
-Here's a brief overview of the endpoints you've described:
+Here's a brief overview of the endpoints  described:
 
 1. **List Articles by Provider and Currency with Pagination**:
    - Endpoint: `GET /list` and `GET /`

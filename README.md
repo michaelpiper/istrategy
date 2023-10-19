@@ -1,4 +1,3 @@
-The installation steps you've provided are clear and concise. They outline the necessary actions to set up and run your application. Here's a summarized version:
 ### requirement:
 1. Node 18 // node -v
 2. Yarn //yarn -v
