@@ -2,19 +2,19 @@
 ## 1. What kind of problems or disadvantages may occur in the handling/maintenance of this list (imagine, that a real-world list like this would contain thousands of entries)?
 
 ### Answer
-1. Handling and maintaining a list like this with thousands of entries could pose several challenges:
+Handling and maintaining a list like this with thousands of entries could pose several challenges:
 
-   a. **Data Integrity**: Ensuring that each entry is accurate and consistent can be difficult, especially if multiple people are responsible for updating the list. Mistakes in article numbers, provider names, or prices could lead to errors in transactions.
+   **Data Integrity**: Ensuring that each entry is accurate and consistent can be difficult, especially if multiple people are responsible for updating the list. Mistakes in article numbers, provider names, or prices could lead to errors in transactions.
 
-   b. **Data Redundancy**: The same provider may appear multiple times with slight variations in their name ("Paystack" and "Paystack Inc."). This redundancy can lead to inefficiencies in storage and make it harder to manage and update the data.
+   **Data Redundancy**: The same provider may appear multiple times with slight variations in their name ("Paystack" and "Paystack Inc."). This redundancy can lead to inefficiencies in storage and make it harder to manage and update the data.
 
-   c. **Scalability**: As the list grows, managing and querying the data efficiently becomes more complex. It may require specialized databases or indexing strategies to maintain performance.
+   **Scalability**: As the list grows, managing and querying the data efficiently becomes more complex. It may require specialized databases or indexing strategies to maintain performance.
 
-   d. **Data Security**: Depending on the sensitivity of the information, security measures need to be in place to prevent unauthorized access or modifications.
+   **Data Security**: Depending on the sensitivity of the information, security measures need to be in place to prevent unauthorized access or modifications.
 
-   e. **Data Retrieval and Analysis**: Extracting meaningful insights from the list may become challenging due to its flat structure. Aggregating data or performing complex queries may be cumbersome.
+   **Data Retrieval and Analysis**: Extracting meaningful insights from the list may become challenging due to its flat structure. Aggregating data or performing complex queries may be cumbersome.
 
-   f. **Data Updates**: Updating existing entries or adding new ones might require careful validation to ensure the integrity of the dataset.
+   **Data Updates**: Updating existing entries or adding new ones might require careful validation to ensure the integrity of the dataset.
 
 ## Questions:
 ## 2. Creating a better data model would involve organizing the information into related entities. 
