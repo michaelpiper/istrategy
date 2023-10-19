@@ -1,0 +1,104 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model APIKey {
+  api_key_id         Int      @unique @default(autoincrement()) @db.UnsignedInt()
+  api_key_ref        String   @id @default(uuid()) @db.VarChar(36)
+  api_key_title      String   @default("") @db.VarChar(125)
+  api_key_name       String   @default("") @db.VarChar(125)
+  api_key_value      String   @unique @db.VarChar(255)
+  api_key_enabled    Boolean  @default(true)
+  api_key_created_at DateTime @default(now()) @db.Timestamp(6)
+  api_key_updated_at DateTime @default(now()) @updatedAt @db.Timestamp(6)
+
+  api_key_to_permissions APIKeyToPermission[]
+}
+
+model APIKeyToPermission {
+  api_key_to_permission_id  Int    @unique @default(autoincrement()) @db.UnsignedInt()
+  api_key_to_permission_ref String @id @default(uuid()) @db.VarChar(36)
+
+  api_key_ref    String @db.VarChar(36)
+  permission_ref String @db.VarChar(36)
+
+  permission_enabled Boolean @default(true)
+
+  api_key    APIKey?     @relation(fields: [api_key_ref], references: [api_key_ref], onDelete: NoAction, onUpdate: NoAction)
+  permission Permission? @relation(fields: [permission_ref], references: [permission_ref], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([api_key_ref, permission_ref])
+}
+
+enum PermissionScope {
+  public
+  private
+  public_or_private
+}
+
+model Permission {
+  permission_id    Int             @unique @default(autoincrement()) @db.UnsignedInt()
+  permission_ref   String          @id @default(uuid()) @db.VarChar(36)
+  permission_name  String          @db.VarChar(125)
+  permission_group String          @db.VarChar(255)
+  permission_scope PermissionScope
+
+  permission_title       String?  @db.VarChar(125)
+  permission_description String?  @db.VarChar(255)
+  permission_enabled     Boolean  @default(true)
+  permission_created_at  DateTime @default(now()) @db.Timestamp(6)
+  permission_updated_at  DateTime @default(now()) @updatedAt @db.Timestamp(6)
+
+  api_key_to_permissions APIKeyToPermission[]
+
+  @@unique([permission_name, permission_scope])
+}
+
+// my code
+// +----------------+     +----------------+
+// |    Article     |     |    Provider    |
+// +----------------+     +----------------+
+// | article_no (PK)|     | provider_no (PK)|
+// | price          |     | provider_name  |
+// | currency       |     +----------------+
+// | provider_no (FK)|
+// +----------------+
+model Article {
+  article_id    Int     @id  @unique @default(autoincrement()) @db.UnsignedInt()
+  price         Float    @db.Float()
+  currency_id   Int     @db.UnsignedInt()
+  provider_id   Int      @db.UnsignedInt()
+
+  created_at  DateTime @default(now()) @db.Timestamp(6)
+  updated_at  DateTime @default(now()) @updatedAt @db.Timestamp(6)
+
+  provider      Provider @relation(fields: [provider_id], references: [provider_id], onDelete: Cascade, onUpdate: Cascade)
+  currency      Currency @relation(fields: [currency_id], references: [currency_id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model Provider {
+  provider_id   Int    @id @unique @default(autoincrement()) @db.UnsignedInt()
+  provider_code String @db.VarChar(200) @unique
+  provider_name String @db.VarChar(200)
+  articles Article[]
+  created_at  DateTime @default(now()) @db.Timestamp(6)
+  updated_at  DateTime @default(now()) @updatedAt @db.Timestamp(6)
+
+}
+
+model Currency {
+  currency_id Int   @id @unique @default(autoincrement()) @db.UnsignedInt()
+  currency_code String @db.Char(3) @unique
+  currency_name String @db.VarChar(200)
+  articles Article[]
+  created_at  DateTime @default(now()) @db.Timestamp(6)
+  updated_at  DateTime @default(now()) @updatedAt @db.Timestamp(6)
+}

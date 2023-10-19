@@ -69,12 +69,14 @@ You can login to the dashboard with your username and password, test@example.com
 ```sql
 select article_id as article_no ,currency_name as article,provider_name as provider, article.provider_id as provider_no, price from article left join currency on article.currency_id = currency.currency_id left join provider on article.provider_id = provider.provider_id;
 ```
+```
+
 +------------+-------------+--------------+-------------+-------+
 | article_no | article     |  provider_no |    provider | price |
 +------------+-------------+--------------+-------------+-------+
 |          1 | EU "Pounds" |            3 | Flutterwave |  1000 |
 +------------+-------------+--------------+-------------+-------+
-
+```
 ![image drawSQL](drawSQL.png)
 
 [Find Answer Here](ANSWER.md)
